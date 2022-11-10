@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.yalantis.library.Koloda;
 
@@ -40,15 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT)
-    {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target)
-        {
-            return false;
-        }
-                                //פעולות שבודקות אם מחליקים ימינה או שמאלה ופועלות בהתאם
-        @Override
+
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction)
         {                   //פעולה ששולחת אימייל
             try {
@@ -68,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
                     return new PasswordAuthentication(stringSenderEmail, stringPasswordSenderEmail);
                 }
             });
-
-
             MimeMessage mimeMessage = new MimeMessage(session);
 
                 mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(stringReceiverEmail));
@@ -87,13 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
                 thread.start();
-
-
-
-
             } catch (AddressException e) {
                 e.printStackTrace();
             } catch (MessagingException e) {
@@ -102,5 +88,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-    };
+
+
 }
